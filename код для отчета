@@ -6,57 +6,76 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \begin{document}
-	\begin{titlepage}
-		\begin{center}
-			\large
-			МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ
-			
-			Федеральное государственное бюджетное образовательное учреждение высшего образования
-			
-			\textbf{АДЫГЕЙСКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ}
-			\vspace{0.25cm}
-			
-			Инженерно-физический факультет
-			
-			Специальность Информационно-вычислительная техника
-			\vfill
+\section{Введение}
+\label{sec:intro}
 
-			\vfill
-			
-			\textsc{Отчет по практике}\\[5mm]
-			
-			{\LARGE \textit{Реализовать метод секущих для нахождения корня функции- Вариант 3}}
-			\bigskip
-			
-			1 курс, группа 1ИВТ2
-		\end{center}
-		\vfill
-		
-		\newlength{\ML}
-		\settowidth{\ML}{«\underline{\hspace{0.7cm}}» \underline{\hspace{2cm}}}
-		\hfill\begin{minipage}{0.5\textwidth}
-			Выполнил:\\
-			\underline{\hspace{\ML}} Сих\,М.Н\\
-			«\underline{\hspace{0.7cm}}» \underline{\hspace{2cm}} 2021 г.
-		\end{minipage}%
-		\bigskip
-		
-		\hfill\begin{minipage}{0.5\textwidth}
-			Руководитель:\\
-			\underline{\hspace{\ML}} С.\,В.~Теплоухов\\
-			«\underline{\hspace{0.7cm}}» \underline{\hspace{2cm}} 2021 г.
-		\end{minipage}%
-		\vfill
+% Что должно быть во введении
+\begin{enumerate}
+Реализовать метод секущих для нахождения корня функции. 
+В методе Ньютона требуется вычислять производную функции, что не всегда удобно. Можно заменить производную первой разделённой разностью, найденной по двум последним итерациям, т. е. заменить касательную секущей. Тогда получим 
+\label{sec:picexample}
+\begin{figure}[h]
+	\centering
+\includegraphics[scale=1]{formula}
+\caption{формула}\label{fig:par}
+
+\end{figure}
+
+Для начала процесса надо задать x0 и x1 . Такие процессы, где для очередного приближения надо знать два предыдущих, называют двух шаговыми. 
+
+\end{enumerate}
 
 
+\section{Код приложения}
+\label{sec:exp:code}
+\begin{verbatim}
+#include <iostream>
+#include <cmath>
+using namespace std;
+double f(double x)//сама функция, можно вести любую, какую захочешь
+{
+return ( pow(x, 2) + 4 * x - 2);
+}
+int main()
+{
+const double eps = 0.00001;//точность вычисление
+double x = 1;//первичное приближение
+double x1 = -1;
+double h;
+do {
+h=((x1-x)*f(x)) / (f(x1)-f(x));//вычисляем вторичное приближение
+x1 = x;
+x -= h;
+} while (abs(h) > eps);//проверем не вышли ли за требуемую точность
+cout.precision(5);//установливаем точность вывода
+cout << "x = " <<x << endl;//вывод
+system("pause");//команда для консоли ждать нажатие кнопки
+return 0;
+}
+\end{verbatim}
+
+
+\section{ Скриньшот программы}
+\label{sec:picexample}
+\begin{figure}[h]
+	\centering
+\includegraphics[scale=0.5]{screen}
+\caption{скринь}\label{fig:par}
+
+\end{figure}
 
 
 
-		
-		\begin{center}
-			Майкоп, 2021 г.
-		\end{center}
-	\end{titlepage}
+\section{ библиографические ссылки}
+
+Для изучения «внутренностей» \TeX{} необходимо 
+изучить~\cite{Knuth-2003}, а для использования \LaTeX{} лучше
+почитать~\cite{Lvovsky-2003, Voroncov-2005}.
+
+\begin{thebibliography}{9}
+\bibitem{Knuth-2003}Кнут Д.Э. Всё про \TeX. \newblock --- Москва: Изд. Вильямс, 2003 г. 550~с.
+\bibitem{Lvovsky-2003}Львовский С.М. Набор и верстка в системе \LaTeX{}. \newblock --- 3-е издание, исправленное и дополненное, 2003 г.
+\bibitem{Voroncov-2005}Воронцов К.В. \LaTeX{} в примерах. 2005 г.
+\end{thebibliography}
+
 \end{document}
-
-
