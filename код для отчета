@@ -54,12 +54,17 @@ return 0;
 }
 \end{verbatim}
 
-
 \section{ Скриньшот программы}
 \label{sec:picexample}
 \begin{figure}[h]
-	\centering
-\includegraphics[scale=0.5]{screen}
+\centering
+\includegraphics[scale=0.35]{screen}
+\caption{скринь}\label{fig:par}
+
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{1}
 \caption{скринь}\label{fig:par}
 
 \end{figure}
